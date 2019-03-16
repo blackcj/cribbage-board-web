@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Cribbage Board</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="css/default.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container">
+		<!-- BEGIN Help Flyout. -->
+		<div id="help-flyout">
+			<div>
+				<h2>Quick Rules</h2>
+				<hr />
+				<h3>The Deal</h3>
+				<p>52-card deck, jokers removed. For two players, each is dealt six cards. For three players each is
+					dealt five cards. Two cards are discarded into the dealer's "crib." Then the player to the dealer's
+					left cuts the deck and the top "starter" card is flipped over.</p>
+				<br />
+				<h3>The Play</h3>
+				<p>The play starts with the player on the dealer's left and continues clockwise. Face cards are worth
+					ten; Aces are worth one. Play must not exceed 31. A player who cannot lay a card without bringing
+					the total above 31 passes by saying "Go."</p>
+				<br />
+				<h3>Pegging</h3>
+				<p>Peg two points for playing a card that brings the total score to either 15 or 31. Peg one point for
+					playing the last card. Peg two points for pairing a card that was just played.</p>
+				<br />
+				<h3>The Points</h3>
+				<ul style="margin-left:20px">
+					<li><strong>Fifteen-twos:</strong> Two points for each separate combination of two or more cards
+						totalings exactly 15.</li>
+					<li><strong>Runs:</strong> Three points for a run of three consecutive cards (regardless of suit),
+						four points for a run of four and five points for a run of five.</li>
+					<li><strong>Pairs:</strong> Two points for a pair of cards. Six points for three cards of a kind.
+						Twelve points for four of a kind.</li>
+					<li><strong>Flush:</strong> Four points for a flush, where all cards in your hand are the same
+						suite. Five points for a five card flush.</li>
+					<li><strong>Nobs:</strong> One point for holding the Jack of the same suite as the "starter" card.
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- END Help Flyout -->
+
+		<!-- Desktop View -->
+		<div id="desktop-view">
+			<!-- This is drawn at the time the page loads -->
+		</div>
+
+		<!-- Mobile View -->
+		<div id="mobile-view" class="noselect">
+			<div id="mobile-header" style="width:100%">
+				<img src="images/widelogo.png" />
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<div id="subtractBlue" class="subtract" onclick="subtractBlue();">
+						_
+					</div>
+				</div>
+				<div class="col-3">
+					<div id="blueScoreDiv" class="score">
+
+					</div>
+				</div>
+				<div class="col-3">
+					<div id="addBlue" class="add" onclick="addBlue();">
+						+
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<div id="subtractGreen" class="subtract" onclick="subtractGreen();">
+						_
+					</div>
+
+				</div>
+				<div class="col-3">
+					<div id="greenScoreDiv" class="score">
+
+					</div>
+				</div>
+				<div class="col-3">
+					<div id="addGreen" class="add" onclick="addGreen();">
+						+
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<div id="subtractRed" class="subtract" onclick="subtractRed();">
+						_
+					</div>
+				</div>
+				<div class="col-3">
+					<div id="redScoreDiv" class="score">
+
+					</div>
+				</div>
+				<div class="col-3">
+					<div id="addRed" class="add" onclick="addRed();">
+						+
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!-- Mobile Footer -->
+			<div class="row">
+				<div style="width: 125px; height: 125px; margin-left:auto; margin-right:auto;">
+					<img src="images/logo.png" />
+				</div>
+			</div>
+		</div>
+		<!-- BEGIN AppBar (used for the menu) -->
+		<div id="app-bar">
+			<div id="app-bar-buttons">
+				<div style="float:left">
+					<button class="noselect" onclick="undo();" id="undoButton" disabled="disabled">
+						Undo
+					</button>
+				</div>
+				<div class="divider"></div>
+				<div style="float:left">
+					<button class="noselect" onclick="showHelpFlyout()" id="cmdHelpId">
+						Help
+					</button>
+				</div>
+				<div class="divider"></div>
+				<div style="float:left">
+					<button class="noselect" onclick="resetGame();">
+						Reset
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- END AppBar -->
+	</div>
+
+	<script>
+		var isReady = false;
+		var hasPegs = false;
+	</script>
+	<script src="js/underscore.min.js"></script>
+	<script src="js/kinetic.min.js"> </script>
+	<script src="js/mathfunctions.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
+</html>
