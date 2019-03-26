@@ -51,25 +51,26 @@ function init() {
         });
 
         // If we don't have a stage, build one and initialize the app
-        stage = new Kinetic.Stage({
+        stage = new Konva.Stage({
             container: 'desktop-view',
             width: 1024 * scale,
             height: window.innerHeight,
-            scale: scale
+            scale: {x:scale, y: scale}
         });
-        var backgroundLayer = new Kinetic.Layer();
+        var backgroundLayer = new Konva.FastLayer();
+        
         stage.add(backgroundLayer);
 
         var imageObj = new Image();
         imageObj.onload = function () {
-            var board = new Kinetic.Image({
+            var board = new Konva.Image({
                 x: 0,
                 y: 0,
                 image: imageObj,
                 width: 1024,
                 height: 768
             });
-
+            board.cache();
             // add the shape to the layer
             backgroundLayer.add(board);
             backgroundLayer.draw();
@@ -80,12 +81,11 @@ function init() {
         lineLayer.add(redLine);
         lineLayer.add(blueLine);
         lineLayer.add(yellowLine);
+        lineLayer.add(simpleText);
         stage.add(lineLayer);
-        stage.add(pegRedLayer);
-        stage.add(pegYellowLayer);
-        stage.add(pegBlueLayer);
-        messageLayer.add(simpleText);
-        stage.add(messageLayer);
+        stage.add(pegLayer);
+        
+        //stage.add(messageLayer);
     }
     isReady = true;
     isLoaded = true;
@@ -112,13 +112,11 @@ function loadImages(sources, callback) {
 
 }
 
-function writeMessage(messageLayer, message, xPos, yPos, color) {
+function writeMessage(message, xPos, yPos, color) {
     simpleText.setText(message);
     simpleText.setX(xPos - 20);
     simpleText.setY(yPos - 100);
     simpleText.setFill(color);
-    messageLayer.draw();
-
 }
 
 function placePeg(peg, row) {
@@ -288,7 +286,7 @@ function onResize() {
         } else {
             updateScores();
         }
-        messageLayer.hide();
+        //messageLayer.hide();
     }
 }
 		// END Resize
