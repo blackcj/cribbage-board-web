@@ -13,7 +13,10 @@ html, body {
 body {            
     background-image: url(../images/felt.jpg);
     background-size: cover; 
-    overflow: hidden;     
+    overflow: hidden;  
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;   
 }
 
 .row {
