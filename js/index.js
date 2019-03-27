@@ -37,7 +37,7 @@ function init() {
         // If we have a stage, resize.
         stage.setWidth(1024 * scale);
         stage.setHeight(window.innerHeight);
-        stage.setScale(scale);
+        stage.setScale({x: scale, y: scale});
         stage.draw();
     } else {
         var sources = {
@@ -119,6 +119,11 @@ function writeMessage(message, xPos, yPos, color) {
     simpleText.setFill(color);
 }
 
+function toggleHelpFlyout() {
+    var element = document.getElementById("help-flyout");
+    element.classList.toggle("hidden");
+}
+
 function placePeg(peg, row) {
     var blueIndex = 0;
     var closest = 500;
@@ -179,6 +184,22 @@ function resetGame() {
     updatePegs();
 }
 
+function subtractBlue() {
+    if (blueScore > 0) {
+        undoData.push(pegIndexes.slice(0));
+        document.getElementById("undoButton").disabled = false;
+        if (pegIndexes[0] > pegIndexes[1]) {
+            pegIndexes[0]--;
+        } else {
+            pegIndexes[1]--;
+        }
+        if (pegIndexes[0] === pegIndexes[1]) {
+            pegIndexes[0]--;
+        }
+        updateScores();
+    }
+}
+
 function addBlue() {
     if (blueScore < 121) {
         undoData.push(pegIndexes.slice(0));
@@ -192,6 +213,22 @@ function addBlue() {
     }
 }
 
+function subtractGreen() {
+    if (greenScore > 0) {
+        undoData.push(pegIndexes.slice(0));
+        document.getElementById("undoButton").disabled = false;
+        if (pegIndexes[2] > pegIndexes[3]) {
+            pegIndexes[2]--;
+        } else {
+            pegIndexes[3]--;
+        }
+        if (pegIndexes[2] === pegIndexes[3]) {
+            pegIndexes[2]--;
+        }
+        updateScores();
+    }
+}
+
 function addGreen() {
     if (greenScore < 121) {
         undoData.push(pegIndexes.slice(0));
@@ -200,6 +237,22 @@ function addGreen() {
             pegIndexes[2]++;
         } else {
             pegIndexes[3]++;
+        }
+        updateScores();
+    }
+}
+
+function subtractRed() {
+    if (redScore > 0) {
+        undoData.push(pegIndexes.slice(0));
+        document.getElementById("undoButton").disabled = false;
+        if (pegIndexes[4] > pegIndexes[5]) {
+            pegIndexes[4]--;
+        } else {
+            pegIndexes[5]--;
+        }
+        if (pegIndexes[4] === pegIndexes[5]) {
+            pegIndexes[4]--;
         }
         updateScores();
     }
@@ -275,6 +328,11 @@ function undo() {
     Handle window resize. Switch between regular and snap view sizes.
 */
 window.addEventListener("resize", onResize, false);
+window.addEventListener("orientationchange", onRotate, false);
+
+function onRotate() {
+    init();
+}
 
 function onResize() {
     var w = window.innerWidth;

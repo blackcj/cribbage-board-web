@@ -4,11 +4,12 @@
 
 <head> 
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<link rel="manifest" href="manifest.json">
 	<title>Cribbage Board</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="css/default.css" rel="stylesheet" />
 </head>
@@ -16,10 +17,13 @@
 <body>
 	<div class="container">
 		<!-- BEGIN Help Flyout. -->
-		<div id="help-flyout">
+		<div id="help-flyout" class="hidden">
 			<div>
-				<h2>Quick Rules</h2>
+				<div>
+					<h2>Quick Rules<i class="material-icons close-button" onclick="toggleHelpFlyout();">close</i></h2>
+				</div>
 				<hr />
+				<br />
 				<h3>The Deal</h3>
 				<p>52-card deck, jokers removed. For two players, each is dealt six cards. For three players each is
 					dealt five cards. Two cards are discarded into the dealer's "crib." Then the player to the dealer's
@@ -133,7 +137,7 @@
 				</div>
 				<div class="divider"></div>
 				<div style="float:left">
-					<button class="noselect" onclick="showHelpFlyout()" id="cmdHelpId">
+					<button class="noselect" onclick="toggleHelpFlyout()" id="cmdHelpId">
 						Help
 					</button>
 				</div>
